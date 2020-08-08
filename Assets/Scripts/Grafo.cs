@@ -1,17 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Grafo : MonoBehaviour
 {
+    [SerializeField] public TextMeshProUGUI grafoID;
+
+    // mono
     void OnEnable()
     {
-        GrafosController.activeGrafos.Add( this.gameObject );
+        GrafosController.AddToGrafos( this );
     }
-
-
     void OnDisable()
     {
-        GrafosController.activeGrafos.Remove( this.gameObject );
+        GrafosController.RemoveFromGrafos( this );
     }
+
+
+
 }
