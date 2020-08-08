@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Grafo : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
-        
+        GrafosController.activeGrafos.Add( this.gameObject );
     }
 
-    // Update is called once per frame
-    void Update()
+
+    void OnDisable()
     {
-        
+        GrafosController.activeGrafos.Remove( this.gameObject );
     }
 }

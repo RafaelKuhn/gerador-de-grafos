@@ -12,7 +12,9 @@ public class GrafosInput : MonoBehaviour
         if ( Input.GetMouseButtonDown(0) )
         {
             Instantiate(grafoPrefab, Input.mousePosition, new Quaternion(), grafosPanel.transform);
-                
+            
+
+
         }
     }
 
