@@ -25,8 +25,9 @@ public class GrafosController : MonoBehaviour
 
     private static void AssignLetter(Grafo grafo)
     {
-        string s = character.ToString();
-        grafo.grafoID.text = s;
+        string currentChar = character.ToString();
+        grafo.grafoID.text = currentChar;
+        grafo.name = "grafo " + currentChar;
 
         character++;
     }
