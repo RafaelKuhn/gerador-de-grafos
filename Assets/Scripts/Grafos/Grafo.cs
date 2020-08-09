@@ -8,9 +8,14 @@ public class Grafo : MonoBehaviour
 {
     [SerializeField] public TextMeshProUGUI grafoID;
     [SerializeField] public Image grafoSprite;
-    [SerializeField] public CircleCollider2D selfCollider;
 
-    // mono
+    [SerializeField] public GameObject graphicalComponents;
+
+    // monobehaviour
+    void Awake()
+    {
+        // provavelmente vamo faze algo aqui
+    }
     void OnEnable()
     {
         GrafosController.AddToGrafos( this );
@@ -20,6 +25,11 @@ public class Grafo : MonoBehaviour
     {
         GrafosController.RemoveFromGrafos( this );
     }
+
+
+
+
+
 
 
 }

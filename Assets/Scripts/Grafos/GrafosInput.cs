@@ -8,11 +8,10 @@ public class GrafosInput : MonoBehaviour
     [SerializeField] private GameObject grafoPrefab;
     [SerializeField] private GrafosController grafosPanel;
 
+    public static bool canUserCreateGrafos = true;
+    private static bool isUserClicking = false;
 
-    public bool inputtable = true;
-    private bool clicking = false;
-
-    private Vector3 grafoPosition;
+    private Vector3 mousePosition;
     private Quaternion grafoRotation;
     private Transform grafoParent;
 
@@ -24,15 +23,13 @@ public class GrafosInput : MonoBehaviour
 
     void Update()
     {
-        clicking = Input.GetMouseButtonDown(0);
-        grafoPosition = Input.mousePosition;
+        isUserClicking = Input.GetMouseButtonDown(0);
+        mousePosition = Input.mousePosition;
 
-        if ( inputtable && clicking )
+        if ( canUserCreateGrafos && isUserClicking )
         {
-            Instantiate(grafoPrefab, grafoPosition, grafoRotation, grafoParent);
-            
-
-
+            Instantiate(grafoPrefab, mousePosition, grafoRotation, grafoParent);
+          //Instantiate(   what?   ,    where?    ,   rotation?  ,    parent  )
         }
     }
 
