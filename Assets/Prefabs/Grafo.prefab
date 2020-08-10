@@ -546,7 +546,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  numberOfPoints: 30
+  numberOfPoints: 75
   radius: 99
   thickness: 2
 --- !u!1 &8702791254452031452
