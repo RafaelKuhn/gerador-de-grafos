@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(RectTransform))]
 [RequireComponent(typeof(CanvasRenderer))]
-public class RectProceduralCircle : Graphic
+public class UICircleRenderer : Graphic
 {
     private const float TAU = Mathf.PI*2;
 

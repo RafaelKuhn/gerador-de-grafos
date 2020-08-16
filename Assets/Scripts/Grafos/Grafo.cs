@@ -9,7 +9,9 @@ public class Grafo : MonoBehaviour
     [SerializeField] public TextMeshProUGUI grafoID;
     [SerializeField] public Image grafoSprite;
     [SerializeField] public GameObject graphicalComponents;
-    
+
+    [SerializeField] GameObject linePrefab;
+
     private const float TAU = Mathf.PI * 2;
 
     //private Vector3 center;
@@ -30,6 +32,28 @@ public class Grafo : MonoBehaviour
     }
 
 
+    public void ConnectToAnotherGrafo(Grafo f)
+    {
+        GameObject line = Instantiate(linePrefab, this.transform);
+        line.GetComponent<UILineRenderer>()._SetPositions(transform.position, f.transform.position);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -37,8 +61,6 @@ public class Grafo : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         DrawCircleOfSpheres(30);
-        
-        //Gizmos.DrawLine();
     }
 
     void DrawCircleOfSpheres(int numberOfSpheres)
@@ -57,8 +79,4 @@ public class Grafo : MonoBehaviour
             Gizmos.DrawSphere(grafoPosition + eachSpherePosition, sphereSize);
         }
     }
-
-
-
-
 }
