@@ -6,21 +6,25 @@ using UnityEngine;
 [RequireComponent(typeof(CanvasRenderer))]
 public class GrafosController : MonoBehaviour
 {
-    private static List<Grafo> activeGrafos = new List<Grafo>();
+    private static List<Grafo> grafos = new List<Grafo>();
+
     private static char character = 'A';
+
 
     public static void AddToGrafos(Grafo grafo)
     {
         AssignLetter(grafo);
 
-        activeGrafos.Add(grafo);
+        DrawLine(grafo);
 
+        grafos.Add(grafo);
+        
         Debug.Log("created grafo " + grafo.grafoID.text);
     }
 
     public static void RemoveFromGrafos(Grafo grafo)
     {
-        activeGrafos.Remove(grafo);
+        grafos.Remove(grafo);
     }
 
     private static void AssignLetter(Grafo grafo)
@@ -32,15 +36,14 @@ public class GrafosController : MonoBehaviour
         character++;
     }
 
-    //private static void AssignIDToGrafo()
-
-
-
-
-
-
-
-
+    private static void DrawLine(Grafo grafo)
+    {
+        if (grafos.Count >= 1)
+            grafos[grafos.Count - 1].ConnectToAnotherGrafo(grafo);
+   
+        // grafos.count - 1 is the last grafo before this grafo
+    }
+    
 
 
 
@@ -48,7 +51,7 @@ public class GrafosController : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        foreach (Grafo grafo in activeGrafos)
+        foreach (Grafo grafo in grafos)
         {
             Gizmos.DrawLine(this.transform.position, grafo.transform.position);
         }

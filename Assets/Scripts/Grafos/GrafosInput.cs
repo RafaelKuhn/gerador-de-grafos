@@ -29,19 +29,8 @@ public class GrafosInput : MonoBehaviour
         mousePosition = Input.mousePosition;
         if ( canUserCreateGrafos && isUserClicking )
         {
-            grafo = Instantiate(grafoPrefab, mousePosition, grafoRotation, grafoParent);
-            //Instantiate(   what?   ,    where?    ,   rotation?  ,    parent  )
-            print(initialLinePoint);
-            if (initialLinePoint == Vector3.zero)
-            {
-                initialLinePoint = mousePosition;
-            }
-            else
-            {
-                DrawLine(mousePosition);
-                initialLinePoint = mousePosition;
-            }
-          
+            Instantiate(grafoPrefab, mousePosition, grafoRotation, grafoParent);
+            //Instantiate(   what?   ,    where?    ,   rotation?  ,    parent  )      
         }
     }
 
