@@ -24,7 +24,13 @@ public class GrafosController : MonoBehaviour
 
     public static void RemoveFromGrafos(Grafo grafo)
     {
-        grafos.Remove(grafo);
+        int grafoIndex = grafos.IndexOf(grafo);
+        if (grafoIndex != 0)
+        {
+            Grafo previousGrafo = grafos[grafoIndex - 1];
+            Destroy(previousGrafo.GetComponentInChildren<UILineRenderer>().gameObject);
+        }
+        grafos.Remove(grafo);      
     }
 
     private static void AssignLetter(Grafo grafo)

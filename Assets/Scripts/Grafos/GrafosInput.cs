@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.EventSystems;
 
 public class GrafosInput : MonoBehaviour
 {
@@ -31,16 +31,25 @@ public class GrafosInput : MonoBehaviour
         {
             Instantiate(grafoPrefab, mousePosition, grafoRotation, grafoParent);
             //Instantiate(   what?   ,    where?    ,   rotation?  ,    parent  )      
+        } 
+        if (Input.GetMouseButtonDown(1))
+        {
+            print("clicou com o direito");
+            CheckIfHasGrafo();
         }
     }
 
-    private void DrawLine(Vector3 finalPoint)
+    private void CheckIfHasGrafo()
     {
-        LineRenderer line = grafo.GetComponent<LineRenderer>();
-        line.positionCount = 2;
-        line.sortingOrder = 5;
-        Vector3[] points = { initialLinePoint, finalPoint };
-        line.SetPositions(points);
+        RaycastHit2D hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (hit = Physics2D.Raycast(mousePosition, Vector2.zero))
+        {
+            Destroy(hit.collider.gameObject);
+        }
     }
+
+
+
 
 }

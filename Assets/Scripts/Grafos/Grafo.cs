@@ -10,7 +10,7 @@ public class Grafo : MonoBehaviour
     [SerializeField] public Image grafoSprite;
     [SerializeField] public GameObject graphicalComponents;
 
-    [SerializeField] GameObject linePrefab;
+    [SerializeField] public GameObject linePrefab;
 
     private const float TAU = Mathf.PI * 2;
 

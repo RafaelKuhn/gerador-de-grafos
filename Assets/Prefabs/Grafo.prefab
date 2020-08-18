@@ -559,7 +559,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1005039530083595064}
   - component: {fileID: 3207928421664170802}
-  - component: {fileID: 4687755858931940798}
+  - component: {fileID: 5851283309372306242}
+  - component: {fileID: 3866500517539363119}
   m_Layer: 5
   m_Name: Grafo
   m_TagString: Untagged
@@ -604,3 +605,35 @@ MonoBehaviour:
   grafoSprite: {fileID: 8306484076932824188}
   graphicalComponents: {fileID: 7107752097564425506}
   linePrefab: {fileID: 6814948190800366953, guid: bd94638180c49ed4292af09eee03e21a, type: 3}
+--- !u!58 &5851283309372306242
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8702791254452031452}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.0031738281}
+  serializedVersion: 2
+  m_Radius: 48.90631
+--- !u!58 &3866500517539363119
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8702791254452031452}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.47922516, y: -0.3857727}
+  serializedVersion: 2
+  m_Radius: 99.788185
