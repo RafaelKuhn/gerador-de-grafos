@@ -84,37 +84,10 @@ public class UILineRenderer : Graphic
 
 
 
-    void OnDrawGizmos()
+    void OnDrawGizmosSelected()
     {
         Gizmos.DrawSphere(startT.position, 3);
         Gizmos.DrawSphere(endT.position, 3);
-
-        float thickness = 10f;
-
-        Gizmos.color = Color.red;
-
-        float slope = (startT.position.y - endT.position.y)/(startT.position.x - endT.position.x);
-        float foundAngle = Mathf.Atan(slope);
-
-        Vector3 x1Pos =
-            startT.position +
-            new Vector3(Mathf.Sin(TAU - foundAngle) * thickness, Mathf.Cos(TAU - foundAngle) * thickness);
-        Vector3 x2Pos =
-            startT.position +
-            new Vector3(Mathf.Sin(TAU / 2f - foundAngle) * thickness, Mathf.Cos(TAU / 2f - foundAngle) * thickness);
-
-        Vector3 y1Pos =
-            endT.position +
-            new Vector3(Mathf.Sin(TAU - foundAngle) * thickness, Mathf.Cos(TAU - foundAngle) * thickness);
-        Vector3 y2Pos =
-            endT.position +
-            new Vector3(Mathf.Sin(TAU / 2f - foundAngle) * thickness, Mathf.Cos(TAU / 2f - foundAngle) * thickness);
-
-        Gizmos.DrawSphere(x1Pos, 3f);
-        Gizmos.DrawSphere(x2Pos, 3f);
-        Gizmos.DrawSphere(y1Pos, 3f);
-        Gizmos.DrawSphere(y2Pos, 3f);
-      
     }
 
 

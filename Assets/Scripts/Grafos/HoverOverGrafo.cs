@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEditor.EventSystems;
 
+
 public class HoverOverGrafo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] public Grafo grafo;
@@ -14,8 +15,9 @@ public class HoverOverGrafo : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     private Color opaque = new Color(1, 1, 1, 1);
     private Color transparent = new Color(1, 1, 1, 0);
-    private Vector3 offset = new Vector3(0, 20, 0);
-    
+
+    private Vector3 sizeOffset = new Vector3(0.3f, 0.3f, 0.3f);
+
     //private bool draggable;
 
     void Awake()
@@ -26,7 +28,7 @@ public class HoverOverGrafo : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         GrafosInput.canUserCreateGrafos = false;
 
-        grafoLocation.position += offset;
+        grafoLocation.localScale += sizeOffset;
         dragImage.color = opaque; 
 
         //draggable = true;
@@ -38,7 +40,7 @@ public class HoverOverGrafo : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         GrafosInput.canUserCreateGrafos = true;
 
-        grafoLocation.position -= offset;
+        grafoLocation.localScale -= sizeOffset;
         dragImage.color = transparent;
         
         //draggable = false;

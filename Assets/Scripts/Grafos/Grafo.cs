@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class Grafo : MonoBehaviour
 {
     [SerializeField] public TextMeshProUGUI grafoID;
@@ -14,11 +15,12 @@ public class Grafo : MonoBehaviour
 
     private const float TAU = Mathf.PI * 2;
 
-    //private Vector3 center;
+   
 
     void Awake()
     {
-        //center = transform.position;
+        
+
         // provavelmente vamo faze algo aqui
     }
     void OnEnable()
@@ -29,6 +31,8 @@ public class Grafo : MonoBehaviour
     void OnDisable()
     {
         GrafosController.RemoveFromGrafos( this );
+
+        GrafosInput.canUserCreateGrafos = true;
     }
 
 

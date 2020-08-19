@@ -8,14 +8,15 @@ public class GrafosInput : MonoBehaviour
     [SerializeField] private GameObject grafoPrefab;
     [SerializeField] private GrafosController grafosPanel;
 
-    public static bool canUserCreateGrafos = true;
-    private static bool isUserClicking = false;
+    public static bool canUserCreateGrafos { get; set; } = true;
 
-    private static Vector3 initialLinePoint;
+    private static bool isUserLeftClicking = false;
+    private static bool isUserRightClicking = false;
+
+
     private Vector3 mousePosition;
     private Quaternion grafoRotation;
     private Transform grafoParent;
-    private GameObject grafo;
 
     void Awake()
     {
@@ -25,24 +26,20 @@ public class GrafosInput : MonoBehaviour
 
     void Update()
     {
-        isUserClicking = Input.GetMouseButtonDown(0);
+        isUserLeftClicking = Input.GetMouseButtonDown(0);
+        isUserRightClicking = Input.GetMouseButtonDown(1);
         mousePosition = Input.mousePosition;
-        if ( canUserCreateGrafos && isUserClicking )
-        {
-            Instantiate(grafoPrefab, mousePosition, grafoRotation, grafoParent);
-            //Instantiate(   what?   ,    where?    ,   rotation?  ,    parent  )      
-        } 
-        if (Input.GetMouseButtonDown(1))
-        {
-            print("clicou com o direito");
-            CheckIfHasGrafo();
-        }
+
+        if ( canUserCreateGrafos && isUserLeftClicking ) { Instantiate(grafoPrefab, mousePosition, grafoRotation, grafoParent); } 
+        
+        if ( isUserRightClicking ) { DeleteIfPossible(); }
+
     }
 
-    private void CheckIfHasGrafo()
+    private void DeleteIfPossible()
     {
         RaycastHit2D hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        
         if (hit = Physics2D.Raycast(mousePosition, Vector2.zero))
         {
             Destroy(hit.collider.gameObject);
