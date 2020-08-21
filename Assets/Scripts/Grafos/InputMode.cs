@@ -4,6 +4,9 @@ using UnityEngine;
 
 public enum InputMode
 {
-    grafo,
-    line
+    Grafo,
+    ArestaSimples,
+    ArestaDirecionada,
+    ArestaPesada
+    
 }

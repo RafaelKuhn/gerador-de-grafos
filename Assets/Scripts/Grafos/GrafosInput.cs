@@ -8,8 +8,8 @@ using UnityEngine.UI;
 public class GrafosInput : MonoBehaviour
 {
     [SerializeField] private GameObject grafoPrefab;
-    [SerializeField] private GrafosController grafosPanel;
     [SerializeField] private GameObject linePrefab;
+    [SerializeField] private GrafosController grafosPanel;
 
     public static bool canUserCreateGrafos { get; set; } = true;
     public static bool canUserDrawLine { get; set; } = true;
@@ -17,16 +17,16 @@ public class GrafosInput : MonoBehaviour
     private static bool isUserLeftClicking = false;
     private static bool isUserRightClicking = false;
 
-    private Vector3 initialLinePoint;
+    private Vector3 initialLinePoint { get; set; }
     private Vector3 mousePosition;
-    private Quaternion grafoRotation;
+    private static Quaternion anyRotation = new Quaternion();
     private Transform grafoParent;
-    public static InputMode inputMode = InputMode.grafo;
+
+    public static InputMode inputMode = InputMode.Grafo;
 
 
     void Awake()
     {
-        grafoRotation = new Quaternion();
         grafoParent = grafosPanel.transform;
     }
 
@@ -36,15 +36,20 @@ public class GrafosInput : MonoBehaviour
         isUserRightClicking = Input.GetMouseButtonDown(1);
         mousePosition = Input.mousePosition;
 
-        if ( canUserCreateGrafos && isUserLeftClicking && inputMode == InputMode.grafo) {
-                Instantiate(grafoPrefab, mousePosition, grafoRotation, grafoParent);           
-        }
-        else if (isUserLeftClicking && inputMode == InputMode.line)
+        if ( isUserLeftClicking )
         {
-            if (CanDrawLine()) { DrawLine(); }         
+            if (inputMode == InputMode.Grafo && canUserCreateGrafos)
+                Instantiate(grafoPrefab, mousePosition, anyRotation, grafoParent);
+
+            else if (inputMode == InputMode.ArestaSimples && CanDrawLine() )
+                DrawLine();
+
         }
 
-        if ( isUserRightClicking ) { DeleteIfPossible(); }
+        if ( isUserRightClicking )
+        { 
+            DeleteIfPossible(); 
+        }
 
     }
 
@@ -61,10 +66,12 @@ public class GrafosInput : MonoBehaviour
     private bool CanDrawLine()
     {
         bool hasInitialPoint = false;
+
         if (canUserDrawLine)
         {
             if (initialLinePoint != Vector3.zero)
                 hasInitialPoint = true;
+
             else
             {
                 hasInitialPoint = false;
@@ -77,8 +84,9 @@ public class GrafosInput : MonoBehaviour
 
     private void DrawLine()
     {
-        GameObject line = Instantiate(linePrefab, grafoParent);
+        GameObject line = Instantiate(linePrefab, Vector3.zero, anyRotation, grafoParent);
         line.GetComponent<UILineRenderer>()._SetPositions(initialLinePoint, mousePosition);
+
         initialLinePoint = Vector3.zero;
     }
 

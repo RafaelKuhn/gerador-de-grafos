@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class UILineRenderer : Graphic
@@ -20,7 +19,7 @@ public class UILineRenderer : Graphic
         float slope = (startT.position.y - endT.position.y) / (startT.position.x - endT.position.x);
         float foundAngle = Mathf.Atan(slope);
 
-        print("ang related to x = " + (foundAngle * 360f / TAU));
+        //print("ang related to x = " + (foundAngle * 360f / TAU));
 
         Vector3 x1Pos =
             startT.position +
