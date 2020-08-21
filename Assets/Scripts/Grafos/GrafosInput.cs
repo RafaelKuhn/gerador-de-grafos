@@ -56,36 +56,48 @@ public class GrafosInput : MonoBehaviour
     private void DeleteIfPossible()
     {
         RaycastHit2D hit;
-        
-        if (hit = Physics2D.Raycast(mousePosition, Vector2.zero))
+        GameObject grafo = GetHoveredGrafo();
+        if (grafo != null)
         {
-            Destroy(hit.collider.gameObject);
+            Destroy(grafo);
         }
+    }
+
+    private GameObject GetHoveredGrafo()
+    {
+        RaycastHit2D hit;
+
+        if (hit = Physics2D.Raycast(mousePosition, Vector2.zero))
+            return hit.collider.gameObject;
+
+        return null;
     }
 
     private bool CanDrawLine()
     {
         bool hasInitialPoint = false;
+        GameObject grafo = GetHoveredGrafo();
 
-        if (canUserDrawLine)
+        if (grafo != null)
         {
             if (initialLinePoint != Vector3.zero)
                 hasInitialPoint = true;
 
             else
             {
-                hasInitialPoint = false;
-                initialLinePoint = mousePosition;
+                initialLinePoint = grafo.transform.position;
             }
+
+            return hasInitialPoint;
         }
-        
-        return hasInitialPoint && canUserDrawLine;
+
+        return false;
     }
 
     private void DrawLine()
     {
         GameObject line = Instantiate(linePrefab, Vector3.zero, anyRotation, grafoParent);
-        line.GetComponent<UILineRenderer>()._SetPositions(initialLinePoint, mousePosition);
+        line.GetComponent<UILineRenderer>()._SetPositions(initialLinePoint, GetHoveredGrafo().transform.position);
 
         initialLinePoint = Vector3.zero;
     }
