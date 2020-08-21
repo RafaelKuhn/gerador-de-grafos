@@ -17,7 +17,7 @@ public class GrafosInput : MonoBehaviour
     private static bool isUserLeftClicking = false;
     private static bool isUserRightClicking = false;
 
-    private Vector3 initialLinePoint { get; set; }
+    public Transform initialLinePoint { get; set; }
     private Vector3 mousePosition;
     private static Quaternion anyRotation = new Quaternion();
     private Transform grafoParent;
@@ -55,7 +55,6 @@ public class GrafosInput : MonoBehaviour
 
     private void DeleteIfPossible()
     {
-        RaycastHit2D hit;
         GameObject grafo = GetHoveredGrafo();
         if (grafo != null)
         {
@@ -80,12 +79,12 @@ public class GrafosInput : MonoBehaviour
 
         if (grafo != null)
         {
-            if (initialLinePoint != Vector3.zero)
+            if (initialLinePoint != null)
                 hasInitialPoint = true;
 
             else
             {
-                initialLinePoint = grafo.transform.position;
+                initialLinePoint = grafo.transform;
             }
 
             return hasInitialPoint;
@@ -96,10 +95,10 @@ public class GrafosInput : MonoBehaviour
 
     private void DrawLine()
     {
-        GameObject line = Instantiate(linePrefab, Vector3.zero, anyRotation, grafoParent);
-        line.GetComponent<UILineRenderer>()._SetPositions(initialLinePoint, GetHoveredGrafo().transform.position);
+        GameObject line = Instantiate(linePrefab, Vector3.zero, anyRotation, initialLinePoint);
+        line.GetComponent<UILineRenderer>()._SetPositions(initialLinePoint.position, GetHoveredGrafo().transform.position);
 
-        initialLinePoint = Vector3.zero;
+        initialLinePoint = null;
     }
 
 
