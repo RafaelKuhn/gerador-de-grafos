@@ -6,8 +6,7 @@ using UnityEngine.UI;
 using UnityEditor.EventSystems;
 
 
-public class HoverOverGrafo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler,
-                                IDragHandler
+public class GrafoMovement : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler
 {
     [SerializeField] public Grafo grafo;
     [SerializeField] public Image dragImage;
@@ -15,13 +14,17 @@ public class HoverOverGrafo : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private Transform grafoLocation;
     private RectTransform grafoRect;
 
-    private Color opaque = new Color(1, 1, 1, 1);
-    private Color transparent = new Color(1, 1, 1, 0);
 
-    private Vector3 sizeOffset = new Vector3(0.3f, 0.3f, 0.3f);
+    private Vector3 relationStartPos;
+    private Vector3 relationEndPos;
 
-    private Vector3 endLinePosition;
     private UILineRenderer line;
+
+    private static Color opaque = new Color(1, 1, 1, 1);
+    private static Color transparent = new Color(1, 1, 1, 0);
+
+    private static Vector3 sizeOffset = new Vector3(0.3f, 0.3f, 0.3f);
+
 
     //private bool draggable;
 
@@ -52,21 +55,20 @@ public class HoverOverGrafo : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         //draggable = false;
     }
 
-    
+    private Vector3 lastPos;
     public void OnBeginDrag(PointerEventData eventData)
     {
-        print("ae");
-        if(line = grafo.GetComponentInChildren<UILineRenderer>())
-            endLinePosition = line.endT.position;
+
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (GrafosInput.inputMode != InputMode.Grafo) { return; }
+
         grafoRect.anchoredPosition += eventData.delta;
-        if (line != null)
-        {
-            line._SetPositions(line.startT.position, endLinePosition);
-        }
+
+        RelationsController.GetRelations(grafo)
+            .ForEach((rel) => rel.line.SetPositions(rel.grafoOrigin.transform.position, rel.grafoEnd.transform.position));
     }
 
     

@@ -36,12 +36,6 @@ public class Grafo : MonoBehaviour
     }
 
 
-    public void ConnectToAnotherGrafo(Grafo f)
-    {
-        GameObject line = Instantiate(linePrefab, this.transform);
-        line.GetComponent<UILineRenderer>()._SetPositions(transform.position, f.transform.position);
-    }
-
 
 
 

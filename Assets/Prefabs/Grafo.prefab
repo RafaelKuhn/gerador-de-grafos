@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4347603716003315949}
   - component: {fileID: 1445389649028253162}
   m_Layer: 5
-  m_Name: Hover Controller
+  m_Name: Manipulation Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -211,7 +211,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7013229810379954322}
   m_Layer: 5
-  m_Name: Drag
+  m_Name: Manipulation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

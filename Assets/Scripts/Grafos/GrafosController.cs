@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CanvasRenderer))]
 public class GrafosController : MonoBehaviour
 {
     public static List<Grafo> grafos = new List<Grafo>();

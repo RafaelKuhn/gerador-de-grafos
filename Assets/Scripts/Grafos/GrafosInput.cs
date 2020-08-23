@@ -9,7 +9,9 @@ public class GrafosInput : MonoBehaviour
 {
     [SerializeField] private GameObject grafoPrefab;
     [SerializeField] private GameObject linePrefab;
-    [SerializeField] private GrafosController grafosPanel;
+
+    [SerializeField] private Transform grafosParent;
+    [SerializeField] private Transform relationsParent;
 
     public static bool canUserCreateGrafos { get; set; } = true;
     public static bool canUserDrawLine { get; set; } = true;
@@ -17,17 +19,17 @@ public class GrafosInput : MonoBehaviour
     private static bool isUserLeftClicking = false;
     private static bool isUserRightClicking = false;
 
-    public Transform initialLinePoint { get; set; }
-    private Vector3 mousePosition;
+    public Grafo initialGrafo { get; set; }
+    
+    private static Vector3 mousePosition;
+    
     private static Quaternion anyRotation = new Quaternion();
-    private Transform grafoParent;
-
     public static InputMode inputMode = InputMode.Grafo;
 
 
     void Awake()
     {
-        grafoParent = grafosPanel.transform;
+        
     }
 
     void Update()
@@ -39,10 +41,10 @@ public class GrafosInput : MonoBehaviour
         if ( isUserLeftClicking )
         {
             if (inputMode == InputMode.Grafo && canUserCreateGrafos)
-                Instantiate(grafoPrefab, mousePosition, anyRotation, grafoParent);
+                CreateGrafo();
 
-            else if (inputMode == InputMode.ArestaSimples && CanDrawLine() )
-                DrawLine();
+            else if (inputMode == InputMode.ArestaSimples && CanDrawLine())
+                CreateRelation();
 
         }
 
@@ -53,21 +55,22 @@ public class GrafosInput : MonoBehaviour
 
     }
 
+
     private void DeleteIfPossible()
     {
-        GameObject grafo = GetHoveredGrafo();
+        Grafo grafo = GetHoveredGrafo();
         if (grafo != null)
         {
             Destroy(grafo);
         }
     }
 
-    private GameObject GetHoveredGrafo()
+    private Grafo GetHoveredGrafo()
     {
         RaycastHit2D hit;
 
         if (hit = Physics2D.Raycast(mousePosition, Vector2.zero))
-            return hit.collider.gameObject;
+            return hit.collider.gameObject.GetComponent<Grafo>();
 
         return null;
     }
@@ -75,17 +78,16 @@ public class GrafosInput : MonoBehaviour
     private bool CanDrawLine()
     {
         bool hasInitialPoint = false;
-        GameObject grafo = GetHoveredGrafo();
+        Grafo grafo = GetHoveredGrafo();
 
         if (grafo != null)
         {
-            if (initialLinePoint != null)
+            if (initialGrafo != null)
                 hasInitialPoint = true;
 
             else
-            {
-                initialLinePoint = grafo.transform;
-            }
+                initialGrafo = grafo;
+       
 
             return hasInitialPoint;
         }
@@ -93,13 +95,25 @@ public class GrafosInput : MonoBehaviour
         return false;
     }
 
-    private void DrawLine()
+    private void CreateGrafo()
     {
-        GameObject line = Instantiate(linePrefab, Vector3.zero, anyRotation, initialLinePoint);
-        line.GetComponent<UILineRenderer>()._SetPositions(initialLinePoint.position, GetHoveredGrafo().transform.position);
-
-        initialLinePoint = null;
+        Instantiate(grafoPrefab, mousePosition, anyRotation, grafosParent);
     }
+    private void CreateRelation()
+    {
+        Relation currentRelation = Instantiate(linePrefab, Vector3.zero, anyRotation, relationsParent)
+            .GetComponent<Relation>();
+
+
+        Grafo currentGrafo = GetHoveredGrafo();
+
+        currentRelation.line.SetPositions(initialGrafo.transform.position, currentGrafo.transform.position);
+        currentRelation.SetGrafos(initialGrafo, currentGrafo);
+
+        Debug.Log("created relation " + initialGrafo.grafoID.text + " to " + currentGrafo.grafoID.text);
+
+        initialGrafo = null;
+    }       
 
 
 
