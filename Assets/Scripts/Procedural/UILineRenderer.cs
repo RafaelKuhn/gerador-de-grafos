@@ -7,7 +7,7 @@ public class UILineRenderer : Graphic
     private const float TAU = Mathf.PI * 2;
 
     public RectTransform startT, endT;
-    
+
     protected override void OnPopulateMesh(VertexHelper vh)
     {
         vh.Clear();
@@ -62,8 +62,7 @@ public class UILineRenderer : Graphic
         startT.position = startPos;
         endT.position = endPos;
 
-        gameObject.SetActive(false);
-        gameObject.SetActive(true);
+        UpdateGeometry();
     }
 
 
