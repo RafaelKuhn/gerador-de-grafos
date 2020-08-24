@@ -27,11 +27,6 @@ public class GrafosInput : MonoBehaviour
     public static InputMode inputMode = InputMode.Grafo;
 
 
-    void Awake()
-    {
-        
-    }
-
     void Update()
     {
         isUserLeftClicking = Input.GetMouseButtonDown(0);
@@ -58,10 +53,12 @@ public class GrafosInput : MonoBehaviour
 
     private void DeleteIfPossible()
     {
-        Grafo grafo = GetHoveredGrafo();
+        Grafo grafo = GetHoveredGrafo();      
         if (grafo != null)
         {
-            Destroy(grafo);
+            List<Relation> relations = RelationsController.GetRelations(grafo);
+            relations.ForEach( relation => Destroy(relation.gameObject) );
+            Destroy(grafo.gameObject);
         }
     }
 
