@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ToggleMode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ToggleMode : MonoBehaviour
 {
     [SerializeField] List<Image> buttons;
     void Start()
@@ -53,16 +53,5 @@ public class ToggleMode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     private void TurnWhite(Image img)
     {
         img.color = Color.white;
-    }
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        GrafosInput.canUserCreateGrafos = false;
-        GrafosInput.canUserDrawLine = false;
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        GrafosInput.canUserCreateGrafos = true;
-        GrafosInput.canUserDrawLine = true;
     }
 }
