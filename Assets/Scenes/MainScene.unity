@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grafoPrefab: {fileID: 8702791254452031452, guid: bc80be292ec57794b822aceb977759de, type: 3}
-  linePrefab: {fileID: 6814948190800366953, guid: bd94638180c49ed4292af09eee03e21a, type: 3}
+  relationPrefab: {fileID: 6814948190800366953, guid: bd94638180c49ed4292af09eee03e21a, type: 3}
   grafosParent: {fileID: 6965867414810814128}
   relationsParent: {fileID: 6965867414810814129}
 --- !u!1 &705507993

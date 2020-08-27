@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class GrafosInput : MonoBehaviour
 {
     [SerializeField] private GameObject grafoPrefab;
-    [SerializeField] private GameObject linePrefab;
+    [SerializeField] private GameObject relationPrefab;
 
     [SerializeField] private Transform grafosParent;
     [SerializeField] private Transform relationsParent;
@@ -16,12 +16,13 @@ public class GrafosInput : MonoBehaviour
     public static bool canUserCreateGrafos { get; set; } = true;
     public static bool canUserDrawLine { get; set; } = true;
 
+    // mouse data
     private static bool isUserLeftClicking = false;
     private static bool isUserRightClicking = false;
+    private static Vector3 mousePosition;
 
     public Grafo initialGrafo { get; set; }
     
-    private static Vector3 mousePosition;
     
     private static Quaternion anyRotation = new Quaternion();
     public static InputMode inputMode = InputMode.Grafo;
@@ -29,37 +30,54 @@ public class GrafosInput : MonoBehaviour
 
     void Update()
     {
-        isUserLeftClicking = Input.GetMouseButtonDown(0);
-        isUserRightClicking = Input.GetMouseButtonDown(1);
-        mousePosition = Input.mousePosition;
+        GetMouseData();
 
         if ( isUserLeftClicking )
         {
-            if (inputMode == InputMode.Grafo && canUserCreateGrafos)
+            if ( CanCreateGrafos() )
                 CreateGrafo();
 
-            else if (inputMode == InputMode.ArestaSimples && CanDrawLine())
+            else if ( CanCreateRelation() )
                 CreateRelation();
-
         }
 
         if ( isUserRightClicking )
         { 
-            DeleteIfPossible(); 
+            DeleteGrafoOrRelation(); 
         }
 
     }
 
-
-    private void DeleteIfPossible()
+    private void GetMouseData()
     {
-        Grafo grafo = GetHoveredGrafo();      
+        isUserLeftClicking = Input.GetMouseButtonDown(0);
+        isUserRightClicking = Input.GetMouseButtonDown(1);
+        mousePosition = Input.mousePosition;
+    }
+    private void DeleteGrafoOrRelation()
+    {
+        if (inputMode == InputMode.Grafo)
+            DeleteGrafoAndItsRelations( GetHoveredGrafo() );
+
+        else
+            DeleteRelations( RelationsController.GetRelations( GetHoveredGrafo() ) );
+
+
+    }
+
+    private void DeleteGrafoAndItsRelations(Grafo grafo)
+    {
         if (grafo != null)
         {
-            List<Relation> relations = RelationsController.GetRelations(grafo);
-            relations.ForEach( relation => Destroy(relation.gameObject) );
+            DeleteRelations( RelationsController.GetRelations(grafo) );
+            
             Destroy(grafo.gameObject);
         }
+    }
+
+    private void DeleteRelations(List<Relation> relations)
+    {
+        relations.ForEach( relation => Destroy(relation.gameObject) );
     }
 
     private Grafo GetHoveredGrafo()
@@ -72,8 +90,21 @@ public class GrafosInput : MonoBehaviour
         return null;
     }
 
-    private bool CanDrawLine()
+    private bool CanCreateGrafos()
     {
+        if (inputMode != InputMode.Grafo) { return false; }
+
+        if (canUserCreateGrafos)
+            return true;
+
+        else
+            return false;
+    }
+
+    private bool CanCreateRelation()
+    {
+        if (inputMode != InputMode.ArestaSimples) { return false; }
+
         bool hasInitialPoint = false;
         Grafo grafo = GetHoveredGrafo();
 
@@ -85,7 +116,6 @@ public class GrafosInput : MonoBehaviour
             else
                 initialGrafo = grafo;
        
-
             return hasInitialPoint;
         }
 
@@ -98,9 +128,8 @@ public class GrafosInput : MonoBehaviour
     }
     private void CreateRelation()
     {
-        Relation currentRelation = Instantiate(linePrefab, Vector3.zero, anyRotation, relationsParent)
+        Relation currentRelation = Instantiate(relationPrefab, Vector3.zero, anyRotation, relationsParent)
             .GetComponent<Relation>();
-
 
         Grafo currentGrafo = GetHoveredGrafo();
 
