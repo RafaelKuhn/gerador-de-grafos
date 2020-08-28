@@ -11,9 +11,22 @@ public class RelationsController : MonoBehaviour
         List<Relation> foundRelations = new List<Relation>();
 
         foreach (Relation currentRelation in relations)
+            if (currentRelation.grafoOrigin.Equals(grafoBeingSearched))
+                foundRelations.Add(currentRelation);
+
+        return foundRelations;
+    }
+
+    public static List<Relation> GetRelationsBothWays(Grafo grafoBeingSearched)
+    {
+        List<Relation> foundRelations = new List<Relation>();
+
+        foreach (Relation currentRelation in relations)
             if (currentRelation.grafoOrigin.Equals(grafoBeingSearched) || currentRelation.grafoEnd.Equals(grafoBeingSearched))
                 foundRelations.Add(currentRelation);
 
         return foundRelations;
     }
+
+
 }

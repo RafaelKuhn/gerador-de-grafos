@@ -60,7 +60,7 @@ public class GrafosInput : MonoBehaviour
             DeleteGrafoAndItsRelations( GetHoveredGrafo() );
 
         else
-            DeleteRelations( RelationsController.GetRelations( GetHoveredGrafo() ) );
+            DeleteRelations(RelationsController.GetRelationsBothWays( GetHoveredGrafo() ) );
 
 
     }
@@ -69,7 +69,7 @@ public class GrafosInput : MonoBehaviour
     {
         if (grafo != null)
         {
-            DeleteRelations( RelationsController.GetRelations(grafo) );
+            DeleteRelations( RelationsController.GetRelationsBothWays(grafo) );
             
             Destroy(grafo.gameObject);
         }

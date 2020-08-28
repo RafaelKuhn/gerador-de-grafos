@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Exporter : MonoBehaviour
 {
+    [SerializeField] private TMP_InputField outputField;
+
     List<Grafo> allGrafos;
     Dictionary<Grafo, List<Relation>> allRelations;
     public void _Export()
@@ -13,12 +16,11 @@ public class Exporter : MonoBehaviour
 
         string s = "";
 
-        print("all relations:");
         foreach ( List<Relation> relations in allRelations.Values )
             foreach ( Relation relation in relations )
                 s += relation.grafoOrigin.grafoID.text+" to "+relation.grafoEnd.grafoID.text+", ";
 
-        print(s);
+        outputField.text = s;
 
         CreateTable();
 

@@ -64,7 +64,8 @@ public class GrafoMovement : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         grafoRect.anchoredPosition += eventData.delta;
 
-        RelationsController.GetRelations(grafo)
+        // esse GetRelations está sendo feito em um 'update', otimizar
+        RelationsController.GetRelationsBothWays(grafo) 
             .ForEach((rel) => rel.line.SetPositions(rel.grafoOrigin.transform.position, rel.grafoEnd.transform.position));
     }
 
