@@ -15,7 +15,7 @@ public class UILineRenderer : Graphic
         UIVertex vert = new UIVertex();
         vert.color = Color.black;
 
-        float thickness = 5f;
+        float thickness = 3f;
 
         float slope = (startT.position.y - endT.position.y) / (startT.position.x - endT.position.x);
         float foundAngle = Mathf.Atan(slope);

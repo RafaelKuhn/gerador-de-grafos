@@ -577,7 +577,7 @@ RectTransform:
   m_GameObject: {fileID: 8702791254452031452}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_Children:
   - {fileID: 5515089400450227685}
   - {fileID: 7013229810379954322}
@@ -604,7 +604,6 @@ MonoBehaviour:
   grafoID: {fileID: 8306484078298067252}
   grafoSprite: {fileID: 8306484076932824188}
   graphicalComponents: {fileID: 7107752097564425506}
-  linePrefab: {fileID: 6814948190800366953, guid: bd94638180c49ed4292af09eee03e21a, type: 3}
 --- !u!58 &5851283309372306242
 CircleCollider2D:
   m_ObjectHideFlags: 0

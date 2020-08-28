@@ -11,10 +11,14 @@ public class Exporter : MonoBehaviour
         allGrafos = GrafosController.grafos;
         allRelations = PopulateRelations(allGrafos);
 
+        string s = "";
+
         print("all relations:");
         foreach ( List<Relation> relations in allRelations.Values )
             foreach ( Relation relation in relations )
-                print ( "\n"+relation.grafoOrigin.grafoID+" to "+relation.grafoEnd.grafoID );
+                s += relation.grafoOrigin.grafoID.text+" to "+relation.grafoEnd.grafoID.text+", ";
+
+        print(s);
 
         CreateTable();
 

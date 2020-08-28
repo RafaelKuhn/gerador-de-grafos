@@ -616,13 +616,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 1
+  m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 720, y: 1520}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
+  m_PhysicalUnit: 4
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
@@ -680,6 +680,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1796903289}
     m_Modifications:
+    - target: {fileID: 5788165298901142081, guid: 5921370a82fbcda4ab60c200e9884aa4, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5788165298901142081, guid: 5921370a82fbcda4ab60c200e9884aa4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5788165298901142081, guid: 5921370a82fbcda4ab60c200e9884aa4, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -19.99997
+      objectReference: {fileID: 0}
     - target: {fileID: 6965867413707667022, guid: 5921370a82fbcda4ab60c200e9884aa4, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
